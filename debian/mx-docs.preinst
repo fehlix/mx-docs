@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# preinst script for mx-docs
+
+set -e
+
+case "$1" in
+  install|upgrade)
+    rm -f  /etc/skel/Desktop/FAQ.desktop       2>/dev/null || :
+    rm -f  /etc/skel/Desktop/Installer.desktop 2>/dev/null || :
+    rm -f  /etc/skel/Desktop/manual.desktop    2>/dev/null || :
+    rmdir  /etc/skel/Desktop                   2>/dev/null || :
+  ;;
+  *)
+    :
+  ;;  
+esac
+exit 0

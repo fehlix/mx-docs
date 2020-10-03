@@ -2,8 +2,8 @@
 FAQ/*.pdf        usr/local/share/doc
 FAQ/tr/*.pdf     usr/local/share/doc
 Help.desktop     usr/share/applications
-manual.desktop   usr/share/applications
 FAQ.desktop      usr/share/applications
+manual.desktop   usr/share/mx-docs
 bin/mx-faq       usr/bin
 bin/mx-manual    usr/bin
 bin/restore-desktop-icons-mx  usr/local/bin
