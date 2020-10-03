@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# xdg-user-dirs-gtk-update wrapper to restore some default desktop icons 
+# on new localoized desktop folder
+# Script placed into /usr/local/bin
+
+LOCALE_CHANGE="false"
+if [ -f ~/.config/user-dirs.locale ] && [ x"${LANG%%.*}"  != x"$(cat ~/.config/user-dirs.locale)" ]; then
+   # locale change
+   LOCALE_CHANGE=true
+   OLD_LANG="$(cat ~/.config/user-dirs.locale)"
+   OLD_DESKTOP=$(xdg-user-dir DESKTOP)
+   NEW_DESKTOP="$HOME/$(gettext -d xdg-user-dirs Desktop)"
+   NEW_DESKTOP_EXISTS=false
+   [ -d "$NEW_DESKTOP" ] &&  NEW_DESKTOP_EXISTS=true
+fi
+
+if [ -x /usr/bin/xdg-user-dirs-gtk-update ]; then
+        /usr/bin/xdg-user-dirs-gtk-update "$@"
+fi
+
+DESKTOP=$(xdg-user-dir DESKTOP)
+
+[ ! -d "$DESKTOP" ] && exit
+
+if [ "$LOCALE_CHANGE" = "false" ] && [ x"${LANG%%.*}"  != x"$(cat ~/.config/user-dirs.locale 2>/dev/null)" ]; then
+   exit
+fi
+if [ "$DESKTOP" != "$NEW_DESKTOP" ] && [ "$NEW_DESKTOP_EXISTS" = "true" ]; then
+   exit
+fi
+
+# put icons on desktop
+
+hash restore-desktop-icons-mx 2>/dev/null  && restore-desktop-icons-mx
+

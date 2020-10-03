@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# restore-desktop-icon-mx
+# script to place default icons on desktop
+
+DESKTOP=$(xdg-user-dir DESKTOP)
+
+[ -d "$DESKTOP" ] || exit
+
+# put icons on desktop if not already exist
+
+# MX Manual
+if [ -f /usr/share/applications/manual.desktop ] && [ ! -e "$DESKTOP"/manual.desktop ] ; then
+     cp /usr/share/applications/manual.desktop "$DESKTOP"/manual.desktop
+     chmod +x "$DESKTOP"/manual.desktop
+fi
+if [ -f /usr/share/applications/Help.desktop ] && [ ! -e "$DESKTOP"/manual.desktop ] ; then
+     cp /usr/share/applications/Help.desktop "$DESKTOP"/manual.desktop
+     sed -i  's/MX User Manual/Manual/'  "$DESKTOP"/manual.desktop
+     chmod +x "$DESKTOP"/manual.desktop
+fi
+
+# MX FAQ
+if [ -f /usr/share/applications/FAQ.desktop ] && [ ! -e "$DESKTOP"/FAQ.desktop ]; then
+     cp /usr/share/applications/FAQ.desktop "$DESKTOP"/FAQ.desktop
+     chmod +x "$DESKTOP"/FAQ.desktop
+fi
+
+# MX Installer on live system only
+[ -d /live ]  || exit
+if [ -f /usr/local/share/live-files/files/etc/skel/Desktop/Installer.desktop ] && [ ! -e "$DESKTOP"/Installer.desktop ]; then
+     cp /usr/local/share/live-files/files/etc/skel/Desktop/Installer.desktop  "$DESKTOP"/Installer.desktop
+     chmod +x "$DESKTOP"/Installer.desktop
+fi
+

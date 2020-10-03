@@ -1,3 +1,10 @@
+mx-docs (20201002mx19) mx; urgency=medium
+
+  * add localized desktop folder name handling
+  * add default icons - Manual, FAQ, Installer - on localized desktop
+
+ -- fehlix <fehlix@mxlinux.org>  Sat, 03 Oct 2020 12:20:47 -0400
+
 mx-docs (20200817mx19) mx; urgency=medium
 
   * Non-maintainer upload.

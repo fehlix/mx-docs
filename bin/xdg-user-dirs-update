@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# xdg-user-dirs-update wrapper to place default desktop icons 
+# on new created and localized desktop folder.
+# script placed into /usr/local/bin
+
+FIRST_RUN=""
+
+[ ! -f ~/.config/user-dirs.locale ] && FIRST_RUN=true
+
+/usr/bin/xdg-user-dirs-update "$@"
+
+[ x"$FIRST_RUN" = x"true" ] || exit
+
+# put icons on desktop
+
+hash restore-desktop-icons-mx 2>/dev/null  && restore-desktop-icons-mx
